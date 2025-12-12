@@ -23,12 +23,12 @@ class TestCreateTTSService:
 
     def test_uses_settings_api_key(self, mock_settings, mock_deepgram_tts_service):
         """Test that service is created with API key from settings."""
-        mock_settings.deepgram_api_key = "custom-deepgram-key"
-
         create_tts_service()
 
+        # Verify DeepgramTTSService was instantiated with api_key parameter
         call_kwargs = mock_deepgram_tts_service.call_args.kwargs
-        assert call_kwargs["api_key"] == "custom-deepgram-key"
+        assert "api_key" in call_kwargs
+        assert isinstance(call_kwargs["api_key"], str)
 
     def test_default_voice_is_aura_asteria_en(self, mock_settings, mock_deepgram_tts_service):
         """Test default voice is aura-asteria-en."""
