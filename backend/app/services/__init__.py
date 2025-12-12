@@ -1,13 +1,12 @@
 """
 MedVoice Services
 
-Business logic for intake processing, LLM integration, and transcription.
+Business logic for session management and intake processing.
 """
 
-from .intake import IntakeService
-from .llm import LLMService
+from .session_store import SessionStore, session_store
 
 __all__ = [
-    "IntakeService",
-    "LLMService",
+    "SessionStore",
+    "session_store",
 ]

@@ -70,6 +70,15 @@ class CreateSessionResponse(BaseModel):
     token: Optional[str] = None
 
 
+class SessionResponse(BaseModel):
+    """Extended session response with room connection info."""
+
+    session_id: str
+    room_url: str
+    token: Optional[str] = None
+    status: SessionStatus
+
+
 class ChatRequest(BaseModel):
     """Request body for chat endpoint."""
 

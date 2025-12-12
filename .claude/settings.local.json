@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(tree:*)",
-      "Skill(python-testing-patterns)"
+      "Skill(python-testing-patterns)",
+      "Bash(python -m pytest:*)",
+      "Bash(python -m pip install:*)",
+      "Bash(uv sync:*)",
+      "Bash(git add:*)",
+      "Bash(New-Item -ItemType Directory -Force -Path \"C:\\Users\\User\\Projects\\MedVoice\\docs\\phases\\phase1-backend-api\", \"C:\\Users\\User\\Projects\\MedVoice\\docs\\phases\\phase2-voice-pipeline\", \"C:\\Users\\User\\Projects\\MedVoice\\docs\\phases\\phase3-frontend\", \"C:\\Users\\User\\Projects\\MedVoice\\docs\\phases\\phase4-polish\")",
+      "Bash(python:*)",
+      "Bash(curl:*)"
     ]
   }
 }
