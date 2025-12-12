@@ -5,11 +5,17 @@ Endpoints for creating, retrieving, and managing voice sessions.
 """
 
 from fastapi import APIRouter, HTTPException, status
+from loguru import logger
 
 from backend.app.models.messages import (
     SessionResponse,
     SessionState,
     SessionStatus,
+)
+from backend.app.services.bot_runner import (
+    start_bot_for_session,
+    stop_bot_for_session,
+    get_active_bot_count,
 )
 from backend.app.services.session_store import session_store
 from backend.app.voice.room import create_daily_room
@@ -49,6 +55,14 @@ async def create_session() -> SessionResponse:
         )
 
     session = await session_store.create(room_url=room_url)
+
+    # Start bot in background
+    try:
+        await start_bot_for_session(session.session_id, room_url)
+        logger.info(f"Bot started for session {session.session_id}")
+    except Exception as e:
+        logger.error(f"Failed to start bot: {e}")
+        # Continue anyway - bot can be started manually if needed
 
     return SessionResponse(
         session_id=session.session_id,
@@ -140,6 +154,9 @@ async def end_session(session_id: str) -> None:
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Session {session_id} not found",
         )
+
+    # Stop bot if running
+    await stop_bot_for_session(session_id)
 
     # Mark as complete before deletion
     await session_store.update(session_id, status=SessionStatus.COMPLETE)
