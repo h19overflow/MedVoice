@@ -75,6 +75,7 @@ async def main() -> None:
         api_key=os.getenv("DEEPGRAM_API_KEY"),
         model="nova-2-general",
         language="en-US",
+    
     )
 
     # TTS - Deepgram Aura
@@ -86,7 +87,7 @@ async def main() -> None:
     # LLM - Gemini
     llm = GoogleLLMService(
         api_key=os.getenv("GOOGLE_API_KEY"),
-        model="gemini-2.0-flash-exp",
+        model="gemini-2.0-flash",
     )
 
     # Context with system prompt
