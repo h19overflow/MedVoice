@@ -32,7 +32,7 @@ class Settings(BaseSettings):
 
     # Required API keys
     deepgram_api_key: str
-    gemini_api_key: str
+    google_api_key: str  # Gemini API key
     daily_api_key: str = ""  # Optional for MVP (chat-only mode)
 
     # Optional settings
